@@ -24,8 +24,6 @@ let sc40 = prezzoKm * 0.4;
 
 
 let textTitle = document.getElementById("text-title").innerText = "Calcolatore prezzo Treni"
-
-
 let textH3 = document.getElementById("text-h3").innerText = "I dati che hai inserito..."
 
 
@@ -34,18 +32,22 @@ let textLi_1 = document.getElementById("li-1").innerText = `- Età inserita: ${e
 let textLi_2 = document.getElementById("li-2").innerText = `- KM inseriti: ${kmUtente}`;
 
 sc20 = parseFloat(sc20).toFixed(2)
-let textLi_3 = document.getElementById("li-3").innerText = `- Hai diritto ad unno sconto del 20%: ${sc20} Euro`;
+let textLi_3 = document.getElementById("li-3").innerText = `- Hai diritto ad uno sconto del 20%: ${sc20} Euro`;
 sc40 = parseFloat(sc40).toFixed(2)
-let textLi_4 = document.getElementById("li-4").innerText = `- Hai diritto ad unno sconto del 40%: ${sc40} Euro`;
+let textLi_4 = document.getElementById("li-4").innerText = `- Hai diritto ad uno sconto del 40%: ${sc40} Euro`;
 
 let textLi_5 = document.getElementById("li-5").innerText = `- Non hai diritto a sconti`;
+let prezzoTotale = prezzoKm - sc20 - sc40;
+prezzoTotale = parseFloat(prezzoTotale).toFixed(2);
+let textBody = document.getElementById("text-body").innerHTML = `<span>il prezzo totale è:</span> ${prezzoTotale} Euro`
+
 
 if(!isNaN(kmUtente) && !isNaN(etaUtente)){
+
     if(etaUtente < maggiorenne){
         sc40 = 0;
         textLi_4 = document.getElementById("li-4").style.display = "none"
         textLi_5 = document.getElementById("li-5").style.display = "none"
-
     } else if (etaUtente > over65) {
         sc20 = 0;
         textLi_3 = document.getElementById("li-3").style.display = "none"
@@ -59,14 +61,21 @@ if(!isNaN(kmUtente) && !isNaN(etaUtente)){
 
 } else {
     textBody = document.getElementById("text-body").innerHTML = "I dati inseriti non sono corretti"
-    textInput = document.getElementById("text-input").style.display = "none"
-    textH3 = document.getElementById("text-h3").style.display = "none"
+    textLi_3 = document.getElementById("li-3").style.display = "none"
+    textLi_4 = document.getElementById("li-4").style.display = "none"
+    textLi_5 = document.getElementById("li-5").style.display = "none"
+
+    if(isNaN(kmUtente)){
+        textLi_2 = document.getElementById("li-2").innerText = "KM inseriti: Inserisci valori numerici"
+    }
+    if(isNaN(etaUtente)){
+        textLi_1 = document.getElementById("li-1").innerText = "Età inserita: Inserisci valori numerici"
+    }
     
 }
 
-let prezzoTotale = prezzoKm - sc20 - sc40;
-prezzoTotale = parseFloat(prezzoTotale).toFixed(2);
-let textBody = document.getElementById("text-body").innerHTML = `<span>il prezzo totale è:</span> ${prezzoTotale} Euro`
+
+
 
 
 
