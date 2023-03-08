@@ -19,23 +19,42 @@ let euroKm = 0.21;
 let prezzoKm = euroKm * kmUtente;
 
 let sc20 = prezzoKm * 0.2;
-let sc30 = prezzoKm * 0.3;
 let sc40 = prezzoKm * 0.4;
+
 
 
 let textTitle = document.getElementById("text-title").innerText = "Calcolatore prezzo Treni"
 
+
+let textH3 = document.getElementById("text-h3").innerText = "I dati che hai inserito..."
+
+
+let textInput = document.getElementById("text-input");
+let textLi_1 = document.getElementById("li-1").innerText = `- Età inserita: ${etaUtente}`;
+let textLi_2 = document.getElementById("li-2").innerText = `- KM inseriti: ${kmUtente}`;
+
+sc20 = parseFloat(sc20).toFixed(2)
+let textLi_3 = document.getElementById("li-3").innerText = `- Hai diritto ad unno sconto del 20%: ${sc20} Euro`;
+sc40 = parseFloat(sc40).toFixed(2)
+let textLi_4 = document.getElementById("li-4").innerText = `- Hai diritto ad unno sconto del 40%: ${sc40} Euro`;
+
+let textLi_5 = document.getElementById("li-5").innerText = `- Non hai diritto a sconti`;
+
 if(!isNaN(kmUtente) && !isNaN(etaUtente)){
     if(etaUtente < maggiorenne){
         sc40 = 0;
-        sc30 = 0;
+        textLi_4 = document.getElementById("li-4").style.display = "none"
+        textLi_5 = document.getElementById("li-5").style.display = "none"
+
     } else if (etaUtente > over65) {
         sc20 = 0;
-        sc30 = 0;
+        textLi_3 = document.getElementById("li-3").style.display = "none"
+        textLi_5 = document.getElementById("li-5").style.display = "none"
     } else {
         sc20 = 0;
         sc40 = 0;
-
+        textLi_3 = document.getElementById("li-3").style.display = "none"
+        textLi_4 = document.getElementById("li-4").style.display = "none"
     }
 
 } else {
@@ -45,18 +64,10 @@ if(!isNaN(kmUtente) && !isNaN(etaUtente)){
     
 }
 
-let prezzoTotale = prezzoKm - sc20 - sc40 - sc30;
+let prezzoTotale = prezzoKm - sc20 - sc40;
+prezzoTotale = parseFloat(prezzoTotale).toFixed(2);
+let textBody = document.getElementById("text-body").innerHTML = `<span>il prezzo totale è:</span> ${prezzoTotale} Euro`
 
-
-let textBody = document.getElementById("text-body").innerHTML = `il prezzo totale è: ${prezzoTotale}`
-let textH3 = document.getElementById("text-h3").innerText = "I dati che hai inserito..."
-let textInput = document.getElementById("text-input").innerHTML = `<ul id="text-input">
-                                                        <li><span>Età inserita:</span>${etaUtente}</li>
-                                                        <li><span>KM inseriti:</span>${kmUtente}</li>
-                                                        <li><span>Hai diritto ad unno sconto del 20%:</span>${sc20}</li>
-                                                        <li><span>Hai diritto ad unno sconto del 40%:</span>${sc40}</li>
-                                                        <li><span>Hai diritto ad unno sconto del 30%:</span>${sc30}</li>
-                                                    </ul>` 
 
 
 
